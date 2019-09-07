@@ -22,13 +22,11 @@ public class GameController : MonoBehaviour
     void Start()
     {
         wrapperScale = cakeWrapper.transform.localScale;
-
-        respawnCounter = -1f;
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("drop"))
+        if (Input.GetButtonDown("drop") && respawnCounter == 0)
         {
             if (newCable != null)
             {
@@ -53,6 +51,11 @@ public class GameController : MonoBehaviour
             cakeWrapper.transform.localScale = new Vector3(0.5f, 0.5f, wrapperScale.y);
 
             respawnCounter = 2;
+
+            anchor.transform.position = new Vector3(0, 4.75f, 0);
+            anchor.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+            anchor.GetComponent<Rigidbody2D>().freezeRotation = true;
+            anchor.GetComponent<Rigidbody2D>().velocity = new Vector2(4, 0);
         }
 
         if (Input.GetButtonDown("test"))
@@ -74,6 +77,17 @@ public class GameController : MonoBehaviour
                 cakeWrapper.transform.localScale = wrapperScale;
                 newCake.GetComponent<BoxCollider2D>().enabled = true;
             }
+        }
+
+        if(respawnCounter < 0 && anchor.transform.position.x < -0.5)
+        {
+            respawnCounter = 0;
+            anchor.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+
+        if (respawnCounter < 1 && anchor.GetComponent<Rigidbody2D>().velocity.x > 0)
+        {
+            anchor.GetComponent<Rigidbody2D>().velocity = new Vector2(-4, 0);
         }
     }
 }
