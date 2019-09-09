@@ -4,90 +4,289 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    //object prefabs
     public GameObject cakePref;
     public GameObject cablePref;
-    private GameObject newCable;
-    private GameObject newCake;
+    public GameObject anchorPref;
+    public GameObject wrapperPref;
 
-    private Vector2 cablePos;
-    private Quaternion cableRot;
+    //left cake's objects
+    private GameObject leftCakeWrapper;
+    private GameObject leftAnchor;
+    private GameObject leftCable;
+    private GameObject leftCake;
 
-    public GameObject anchor;
+    //right cake's objects
+    private GameObject rightCakeWrapper;
+    private GameObject rightAnchor;
+    private GameObject rightCable;
+    private GameObject rightCake;
 
-    public GameObject cakeWrapper;
-    private Vector3 wrapperScale;
+    //current cake's objects
+    private GameObject currentWrapper;
+    private GameObject currentAnchor;
+    private GameObject currentCable;
+    private GameObject currentCake;
 
+    //left cake's object positions
+    private Vector3 leftCablePos;
+    private Vector3 leftCakePos;
+    private Vector3 leftAnchorPos;
+
+    //right cake's object positions
+    private Vector3 rightCablePos;
+    private Vector3 rightCakePos;
+    private Vector3 rightAnchorPos;
+
+    //whether or not a new cake's direction has changed
+    private bool anchorDirectionChanged = false;
+
+    //counter for timing respawn events
     private float respawnCounter = 0;
+
+    //creates a new cake if a cake is missing
+    private void createCake()
+    {
+        if(rightCake == null)
+        {
+            rightCakeWrapper = Instantiate(wrapperPref, rightAnchorPos, Quaternion.identity);
+
+            rightAnchor = Instantiate(anchorPref, rightAnchorPos, Quaternion.identity);
+            rightAnchor.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+            rightAnchor.GetComponent<Rigidbody2D>().freezeRotation = true;
+
+            rightCable = Instantiate(cablePref, rightCablePos, Quaternion.identity);
+            rightCable.transform.SetParent(rightCakeWrapper.transform);
+            rightCable.GetComponent<HingeJoint2D>().connectedBody = rightAnchor.GetComponent<Rigidbody2D>();
+
+            rightCake = Instantiate(cakePref, rightCakePos, Quaternion.identity);
+            rightCake.transform.SetParent(rightCakeWrapper.transform);
+            rightCake.GetComponent<HingeJoint2D>().connectedBody = rightCable.GetComponent<Rigidbody2D>();
+            rightCake.GetComponent<BoxCollider2D>().enabled = false;
+
+            rightCakeWrapper.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        }
+
+        if(leftCake == null)
+        {
+            leftCakeWrapper = Instantiate(wrapperPref, leftAnchorPos, Quaternion.identity);
+
+            leftAnchor = Instantiate(anchorPref, leftAnchorPos, Quaternion.identity);
+            leftAnchor.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+            leftAnchor.GetComponent<Rigidbody2D>().freezeRotation = true;
+
+            leftCable = Instantiate(cablePref, leftCablePos, Quaternion.identity);
+            leftCable.transform.SetParent(leftCakeWrapper.transform);
+            leftCable.GetComponent<HingeJoint2D>().connectedBody = leftAnchor.GetComponent<Rigidbody2D>();
+
+            leftCake = Instantiate(cakePref, leftCakePos, Quaternion.identity);
+            leftCake.transform.SetParent(leftCakeWrapper.transform);
+            leftCake.GetComponent<HingeJoint2D>().connectedBody = leftCable.GetComponent<Rigidbody2D>();
+            leftCake.GetComponent<BoxCollider2D>().enabled = false;
+
+            leftCakeWrapper.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        }
+    }
+
+    //swipecontrol variables
+    Vector2 firstPressPos;
+    Vector2 secondPressPos;
+    Vector2 currentSwipe;
+
+    public int Swipe()
+    {
+        if (Input.touches.Length > 0)
+        {
+            Touch t = Input.GetTouch(0);
+            if (t.phase == TouchPhase.Began)
+            {
+                //save began touch 2d point
+                firstPressPos = new Vector2(t.position.x, t.position.y);
+            }
+            if (t.phase == TouchPhase.Ended)
+            {
+                //save ended touch 2d point
+                secondPressPos = new Vector2(t.position.x, t.position.y);
+
+                //create vector from the two points
+                currentSwipe = new Vector3(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
+
+                //normalize the 2d vector
+                currentSwipe.Normalize();
+
+                //swipe upwards
+                if (currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+                {
+                    return 0;
+                }
+                //swipe down
+                if (currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+                {
+                    return 0;
+                }
+                //swipe left
+                if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                {
+                    if(currentCake == null)
+                    {
+                        currentCable = rightCable;
+                        currentCake = rightCake;
+                        currentAnchor = rightAnchor;
+                        currentWrapper = rightCakeWrapper;
+
+                        rightCake = null;
+
+                        respawnCounter = 1;
+                        currentAnchor.GetComponent<Rigidbody2D>().velocity = new Vector2(3, 0);
+                    }
+
+                    return -1;
+                }
+                //swipe right
+                if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                {
+                    if (currentCake == null)
+                    {
+                        currentCable = leftCable;
+                        currentCake = leftCake;
+                        currentAnchor = leftAnchor;
+                        currentWrapper = leftCakeWrapper;
+
+                        leftCake = null;
+
+                        respawnCounter = 1;
+                        currentAnchor.GetComponent<Rigidbody2D>().velocity = new Vector2(-3, 0);
+                    }
+
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
 
     void Start()
     {
-        wrapperScale = cakeWrapper.transform.localScale;
+        //sets the object positions at the start of the program
+        leftCablePos = new Vector3(-2f, 3.6f, 0);
+        leftCakePos = new Vector3(-2f, 2.45f, 0);
+        leftAnchorPos = new Vector3(-2f, 4.75f, 0);
+
+        rightCablePos = new Vector3(2f, 3.6f, 0);
+        rightCakePos = new Vector3(2f, 2.45f, 0);
+        rightAnchorPos = new Vector3(2f, 4.75f, 0);
+
+        //creates the first cakes
+        createCake();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("drop") && respawnCounter == 0)
+        Swipe();
+
+        //if there is no ongoing respawn event
+        if(respawnCounter <= 0)
         {
-            if (newCable != null)
+            //drops the current cake and creates a new one
+            if (Input.GetButtonDown("drop"))
             {
-                Destroy(newCable);
+                if(currentWrapper != null)
+                {
+                    Destroy(currentWrapper);
+                }
+
+                if (currentAnchor != null)
+                {
+                    Destroy(currentAnchor);
+                }
+
+                if (currentCable != null)
+                {
+                    Destroy(currentCable);
+                }
+
+                if (currentCake != null)
+                {
+                    currentCake.transform.SetParent(null);
+                    currentCake.GetComponent<HingeJoint2D>().enabled = false;
+                    currentCake.GetComponent<BoxCollider2D>().enabled = true;
+
+                    currentCake = null;
+                }
+
+                createCake();
             }
 
-            if (newCake != null)
+            //brings in the right cake
+            if (Input.GetAxisRaw("Horizontal") > 0 && currentCake == null)
             {
-                newCake.transform.SetParent(null);
-                newCake.GetComponent<HingeJoint2D>().enabled = false;
+                currentCable = rightCable;
+                currentCake = rightCake;
+                currentAnchor = rightAnchor;
+                currentWrapper = rightCakeWrapper;
+
+                rightCake = null;
+
+                respawnCounter = 1;
+                currentAnchor.GetComponent<Rigidbody2D>().velocity = new Vector2(3, 0);
             }
+            //brings in the left cake
+            else if (Input.GetAxisRaw("Horizontal") < 0 && currentCake == null)
+            {
+                currentCable = leftCable;
+                currentCake = leftCake;
+                currentAnchor = leftAnchor;
+                currentWrapper = leftCakeWrapper;
 
-            newCable = Instantiate(cablePref, new Vector3(0, 3.6f, 0), Quaternion.identity);
-            newCable.transform.SetParent(cakeWrapper.transform);
-            newCable.GetComponent<HingeJoint2D>().connectedBody = anchor.GetComponent<Rigidbody2D>();
+                leftCake = null;
 
-            newCake = Instantiate(cakePref, new Vector3(0, 2.45f, 0), Quaternion.identity);
-            newCake.transform.SetParent(cakeWrapper.transform);
-            newCake.GetComponent<HingeJoint2D>().connectedBody = newCable.GetComponent<Rigidbody2D>();
-            newCake.GetComponent<BoxCollider2D>().enabled = false;
-
-            cakeWrapper.transform.localScale = new Vector3(0.5f, 0.5f, wrapperScale.y);
-
-            respawnCounter = 2;
-
-            anchor.transform.position = new Vector3(0, 4.75f, 0);
-            anchor.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
-            anchor.GetComponent<Rigidbody2D>().freezeRotation = true;
-            anchor.GetComponent<Rigidbody2D>().velocity = new Vector2(4, 0);
+                respawnCounter = 1;
+                currentAnchor.GetComponent<Rigidbody2D>().velocity = new Vector2(-3, 0);
+            }
         }
-
-        if (Input.GetButtonDown("test"))
-        {
-            if(newCake != null)
-            {
-                newCake.GetComponent<Rigidbody2D>().velocity += new Vector2(2f, 0);
-            }
-        }
-
+        
+        //scales the incoming cake and enables the collider
         if (respawnCounter > 0)
         {
             respawnCounter -= Time.deltaTime;
 
-            cakeWrapper.transform.localScale += new Vector3(Time.deltaTime * 0.25f, Time.deltaTime * 0.25f, 0);
+            currentWrapper.transform.localScale += new Vector3(Time.deltaTime * 0.5f, Time.deltaTime * 0.5f, 0);
 
             if (respawnCounter < 0)
             {
-                cakeWrapper.transform.localScale = wrapperScale;
-                newCake.GetComponent<BoxCollider2D>().enabled = true;
+                currentWrapper.transform.localScale = new Vector3(1, 1, 1);
+                currentCake.GetComponent<BoxCollider2D>().enabled = true;
             }
         }
 
-        if(respawnCounter < 0 && anchor.transform.position.x < -0.5)
+        if(currentAnchor != null)
         {
-            respawnCounter = 0;
-            anchor.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        }
+            if (respawnCounter < 0)
+            {
+                anchorDirectionChanged = false;
 
-        if (respawnCounter < 1 && anchor.GetComponent<Rigidbody2D>().velocity.x > 0)
-        {
-            anchor.GetComponent<Rigidbody2D>().velocity = new Vector2(-4, 0);
+                //freezes the current cake's anchor once it reaches the middle
+                if (currentAnchor.transform.position.x < 0.1f && currentAnchor.transform.position.x > -0.1f)
+                {
+                    respawnCounter = 0;
+                    currentAnchor.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                }
+            }
+            
+            //changes the current anchor's direction 0.5 seconds before the end of the respawn event
+            if ((respawnCounter < 0.5f && respawnCounter > 0) && anchorDirectionChanged == false)
+            {
+                anchorDirectionChanged = true;
+
+                if(currentAnchor.GetComponent<Rigidbody2D>().velocity.x < 0)
+                {
+                    currentAnchor.GetComponent<Rigidbody2D>().velocity = new Vector2(5, 0);
+                }
+                else
+                {
+                    currentAnchor.GetComponent<Rigidbody2D>().velocity = new Vector2(-5, 0);
+                }
+            }
         }
     }
 }
