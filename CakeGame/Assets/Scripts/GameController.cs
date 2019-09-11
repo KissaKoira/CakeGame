@@ -167,49 +167,76 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        //sets the object positions at the start of the program
-        leftCablePos = new Vector3(-2f, 3.6f, 0);
-        leftCakePos = new Vector3(-2f, 2.45f, 0);
-        leftAnchorPos = new Vector3(-2f, 4.75f, 0);
+        //the distance the cakes are set off the middle
+        float cakeOffset = 1.2f;
 
-        rightCablePos = new Vector3(2f, 3.6f, 0);
-        rightCakePos = new Vector3(2f, 2.45f, 0);
-        rightAnchorPos = new Vector3(2f, 4.75f, 0);
+        //sets the object positions at the start of the program
+        leftCablePos = new Vector3(cakeOffset * -1, 3.6f, 0);
+        leftCakePos = new Vector3(cakeOffset * -1, 2.45f, 0);
+        leftAnchorPos = new Vector3(cakeOffset * -1, 4.75f, 0);
+
+        rightCablePos = new Vector3(cakeOffset, 3.6f, 0);
+        rightCakePos = new Vector3(cakeOffset, 2.45f, 0);
+        rightAnchorPos = new Vector3(cakeOffset, 4.75f, 0);
 
         //creates the first cakes
         createCake();
     }
 
+    void dropCake(GameObject cake)
+    {
+        float rotation;
+
+        if(cake.transform.rotation.z < 0)
+        {
+            rotation = 0.3f;
+        }
+        else
+        {
+            rotation = -0.3f;
+        }
+
+        cake.transform.Rotate(new Vector3(0, 0, rotation));
+
+        if(Mathf.Abs(cake.transform.rotation.z) < 0.01f)
+        {
+            cake.transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
+    }
+
+    GameObject droppingCake;
+
     void Update()
     {
+        //swipe controls
         Swipe();
 
+        //rotates the dropping cake 
+        if(droppingCake != null)
+        {
+            dropCake(droppingCake);
+        }
+        
         //if there is no ongoing respawn event
         if(respawnCounter <= 0)
         {
             //drops the current cake and creates a new one
             if (Input.GetButtonDown("drop"))
             {
-                if(currentWrapper != null)
+                if(currentCake != null)
                 {
                     Destroy(currentWrapper);
-                }
-
-                if (currentAnchor != null)
-                {
                     Destroy(currentAnchor);
-                }
-
-                if (currentCable != null)
-                {
                     Destroy(currentCable);
-                }
 
-                if (currentCake != null)
-                {
                     currentCake.transform.SetParent(null);
                     currentCake.GetComponent<HingeJoint2D>().enabled = false;
                     currentCake.GetComponent<BoxCollider2D>().enabled = true;
+
+                    currentCake.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+                    currentCake.GetComponent<Rigidbody2D>().freezeRotation = true;
+
+                    droppingCake = currentCake;
 
                     currentCake = null;
                 }
