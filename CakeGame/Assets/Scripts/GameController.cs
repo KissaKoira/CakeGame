@@ -171,13 +171,13 @@ public class GameController : MonoBehaviour
         float cakeOffset = 1.2f;
 
         //sets the object positions at the start of the program
-        leftCablePos = new Vector3(cakeOffset * -1, 3.6f, 0);
+        leftCablePos = new Vector3(cakeOffset * -1, 3.9f, 0);
         leftCakePos = new Vector3(cakeOffset * -1, 2.45f, 0);
-        leftAnchorPos = new Vector3(cakeOffset * -1, 4.75f, 0);
+        leftAnchorPos = new Vector3(cakeOffset * -1, 5.05f, 0);
 
-        rightCablePos = new Vector3(cakeOffset, 3.6f, 0);
+        rightCablePos = new Vector3(cakeOffset, 3.9f, 0);
         rightCakePos = new Vector3(cakeOffset, 2.45f, 0);
-        rightAnchorPos = new Vector3(cakeOffset, 4.75f, 0);
+        rightAnchorPos = new Vector3(cakeOffset, 5.05f, 0);
 
         //creates the first cakes
         createCake();
@@ -186,6 +186,7 @@ public class GameController : MonoBehaviour
     void dropCake(GameObject cake)
     {
         float rotation;
+        float velocity = 0;
 
         if(cake.transform.rotation.z < 0)
         {
@@ -202,6 +203,10 @@ public class GameController : MonoBehaviour
         {
             cake.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
+
+        velocity -= Time.deltaTime * 10;
+
+        cake.GetComponent<Rigidbody2D>().velocity += new Vector2(0, velocity);
     }
 
     GameObject droppingCake;
@@ -232,6 +237,7 @@ public class GameController : MonoBehaviour
                     currentCake.transform.SetParent(null);
                     currentCake.GetComponent<HingeJoint2D>().enabled = false;
                     currentCake.GetComponent<BoxCollider2D>().enabled = true;
+                    currentCake.transform.GetChild(1).gameObject.SetActive(true);
 
                     currentCake.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
                     currentCake.GetComponent<Rigidbody2D>().freezeRotation = true;
