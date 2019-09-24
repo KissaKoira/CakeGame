@@ -17,8 +17,8 @@ public class GameController : MonoBehaviour
     private GameObject currentCake;
 
     //cake's object positions
-    public Vector3 cakePos;
-    public float cakeRot;
+    private Vector3 cakePos;
+    private float cakeRot;
 
     //creates a new cake if a cake is missing
     private void createCake()
@@ -26,15 +26,13 @@ public class GameController : MonoBehaviour
         if(rightCake == null)
         {
             rightCake = Instantiate(cakePref, cakePos, Quaternion.identity);
-            rightCake.transform.Rotate(new Vector3(0, 0, cakeRot));
-            rightCake.GetComponent<Animator>().SetTrigger("goRight");
+            rightCake.GetComponent<Animator>().SetTrigger("spawnRight");
         }
 
         if(leftCake == null)
         {
             leftCake = Instantiate(cakePref, cakePos, Quaternion.identity);
-            leftCake.transform.Rotate(new Vector3(0, 0, cakeRot * -1));
-            leftCake.GetComponent<Animator>().SetTrigger("goLeft");
+            leftCake.GetComponent<Animator>().SetTrigger("spawnLeft");
         }
     }
 
@@ -92,12 +90,14 @@ public class GameController : MonoBehaviour
     void Start()
     {
         //sets the object positions at the start of the program
-        cakePos = new Vector3(0, 3.5f, 0);
-        cakeRot = 60f;
+        cakePos = new Vector3(0, 7f, 0);
+        cakeRot = 0f;
 
         //creates the first cakes
         createCake();
     }
+
+    GameObject droppingCake;
 
     void dropCake(GameObject cake)
     {
@@ -123,9 +123,7 @@ public class GameController : MonoBehaviour
         velocity -= Time.deltaTime * 10;
 
         cake.GetComponent<Rigidbody2D>().velocity += new Vector2(0, velocity);
-    }
-
-    GameObject droppingCake;
+    } 
 
     void Update()
     {
@@ -166,6 +164,8 @@ public class GameController : MonoBehaviour
 
             rightCake = null;
 
+            currentCake.GetComponent<Animator>().SetTrigger("moveRight");
+
             createCake();
         }
         //brings in the left cake
@@ -174,6 +174,8 @@ public class GameController : MonoBehaviour
             currentCake = leftCake;
 
             leftCake = null;
+
+            currentCake.GetComponent<Animator>().SetTrigger("moveRight");
 
             createCake();
         }
