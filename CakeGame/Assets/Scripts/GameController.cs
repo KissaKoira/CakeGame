@@ -180,4 +180,11 @@ public class GameController : MonoBehaviour
             createCake();
         }
     }
+
+    public void disableAnimator()
+    {
+        Debug.Log("animator disabled");
+
+
+    }
 }
