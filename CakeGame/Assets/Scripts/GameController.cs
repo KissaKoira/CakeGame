@@ -16,9 +16,13 @@ public class GameController : MonoBehaviour
     //current cake's objects
     private GameObject currentCake;
 
+    private string cakeFrom = "";
+
     //cake's object positions
     private Vector3 cakePos;
     private float cakeRot;
+
+    private bool animationActive = true;
 
     //creates a new cake if a cake is missing
     private void createCake()
@@ -113,9 +117,9 @@ public class GameController : MonoBehaviour
             rotation = -0.3f;
         }
 
-        cake.transform.Rotate(new Vector3(0, 0, rotation));
+        cake.transform.Rotate(new Vector3(0, 0, rotation * Time.deltaTime * 350));
 
-        if(Mathf.Abs(cake.transform.rotation.z) < 0.01f)
+        if(Mathf.Abs(cake.transform.rotation.z) < 0.03f)
         {
             cake.transform.rotation = new Quaternion(0, 0, 0, 0);
         }
@@ -139,11 +143,16 @@ public class GameController : MonoBehaviour
         //drops the current cake and creates a new one
         if (Input.GetButtonDown("drop"))
         {
-            if(currentCake != null)
+            if(currentCake != null && !animationActive)
             {
-                GameObject wrapper = currentCake.transform.parent.gameObject;
+                animationActive = true;
+
+                GameObject wrapper = currentCake;
+
+                currentCake = wrapper.transform.GetChild(2).gameObject;
 
                 currentCake.transform.SetParent(null);
+                currentCake.GetComponent<BoxCollider2D>().enabled = true;
                 currentCake.GetComponent<HingeJoint2D>().enabled = false;
                 currentCake.GetComponent<BoxCollider2D>().enabled = true;
                 currentCake.transform.GetChild(1).gameObject.SetActive(true);
@@ -152,6 +161,8 @@ public class GameController : MonoBehaviour
                 currentCake.GetComponent<Rigidbody2D>().freezeRotation = true;
 
                 droppingCake = currentCake;
+
+                Destroy(wrapper);
 
                 currentCake = null;
             }
@@ -166,6 +177,8 @@ public class GameController : MonoBehaviour
 
             currentCake.GetComponent<Animator>().SetTrigger("moveRight");
 
+            cakeFrom = "right";
+
             createCake();
         }
         //brings in the left cake
@@ -175,16 +188,32 @@ public class GameController : MonoBehaviour
 
             leftCake = null;
 
-            currentCake.GetComponent<Animator>().SetTrigger("moveRight");
+            currentCake.GetComponent<Animator>().SetTrigger("moveLeft");
+
+            cakeFrom = "left";
 
             createCake();
+        }
+
+        if (Input.GetButtonDown("test"))
+        {
+            Debug.Log("test");
         }
     }
 
     public void disableAnimator()
     {
-        Debug.Log("animator disabled");
+        Debug.Log("animator disabled " + currentCake.transform.GetChild(2).gameObject.name);
 
+        animationActive = false;
 
+        if(cakeFrom == "right")
+        {
+            currentCake.transform.GetChild(2).gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(-5, 0);
+        }
+        else
+        {
+            currentCake.transform.GetChild(2).gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(5, 0);
+        }
     }
 }
