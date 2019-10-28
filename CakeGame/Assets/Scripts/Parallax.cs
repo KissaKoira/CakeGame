@@ -23,19 +23,22 @@ public class Parallax : MonoBehaviour
     void Update()
     {
         //float dist = (cam.transform.position.y * parallaxEffect);
- 
+
         //transform.position = new Vector3(transform.position.x, startpos + dist, transform.position.z);
- 
+
         if (Input.GetButton("test"))
         {
             p2 = p + 1;
-           
         }
- 
-        p = p + (p2 - p) * 0.05f;
+
+        p = p + (p2 - p) * Time.deltaTime * 5;
  
         //transform.position = new Vector3(transform.position.x, startpos - parallaxEffect*p, transform.position.z);
         transform.position = new Vector3(startposX - parallaxEffectX * p, startposY - parallaxEffectY * p, transform.position.z);
- 
+    }
+
+    public void moveObject()
+    {
+        p2 = p + 1;
     }
 }

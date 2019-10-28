@@ -62,6 +62,13 @@ public class collision : MonoBehaviour
             if(cakeBody.transform.position.y > -2)
             {
                 GameObject.Find("Main Camera").GetComponent<cameraController>().moveCamera();
+
+                var objects = FindObjectsOfType<Parallax>();
+
+                for(int i = 0; i < objects.Length; i++)
+                {
+                    objects[i].moveObject();
+                }
             }
 
             gameController.GetComponent<GameController>().setLastCake(cakeBody);
