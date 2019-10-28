@@ -122,6 +122,7 @@ public class GameController : MonoBehaviour
         if(Mathf.Abs(cake.transform.rotation.z) < 0.03f)
         {
             cake.transform.rotation = new Quaternion(0, 0, 0, 0);
+            droppingCake = null;
         }
 
         velocity -= Time.deltaTime * 10;
@@ -147,15 +148,17 @@ public class GameController : MonoBehaviour
             {
                 animationActive = true;
 
+                //changes currentCake from cakeWrapper to Cake
                 GameObject wrapper = currentCake;
-
                 currentCake = wrapper.transform.GetChild(2).gameObject;
 
+                Debug.Log(currentCake);
+
                 currentCake.transform.SetParent(null);
-                currentCake.GetComponent<BoxCollider2D>().enabled = true;
                 currentCake.GetComponent<HingeJoint2D>().enabled = false;
                 currentCake.GetComponent<BoxCollider2D>().enabled = true;
-                currentCake.transform.GetChild(1).gameObject.SetActive(true);
+                
+                currentCake.transform.GetChild(0).gameObject.SetActive(true);
 
                 currentCake.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
                 currentCake.GetComponent<Rigidbody2D>().freezeRotation = true;
@@ -163,7 +166,6 @@ public class GameController : MonoBehaviour
                 droppingCake = currentCake;
 
                 Destroy(wrapper);
-
                 currentCake = null;
             }
         }
@@ -215,5 +217,17 @@ public class GameController : MonoBehaviour
         {
             currentCake.transform.GetChild(2).gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(5, 0);
         }
+    }
+
+    GameObject lastCake;
+
+    public void setLastCake(GameObject cake)
+    {
+        lastCake = cake;
+    }
+
+    public GameObject getLastCake()
+    {
+        return lastCake;
     }
 }
