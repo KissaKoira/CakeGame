@@ -70,6 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93839028548c0349801a81bda256ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cakeSplat: {fileID: 6731912384594528557, guid: 6c590f2152690d344860369516636f88,
+    type: 3}
+  points: {fileID: 8477974195462931559, guid: 182ffb7384d12ef48bb84b6d281aa85a, type: 3}
   lastCake: {fileID: 0}
 --- !u!1 &685418325386008242
 GameObject:

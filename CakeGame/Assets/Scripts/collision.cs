@@ -6,42 +6,69 @@ public class collision : MonoBehaviour
 {
     GameObject gameController;
 
-    private bool cakeBalance = true;
+    public GameObject cakeSplat;
+
+    public GameObject canvas;
+    public GameObject points;
+
     private GameObject cakeBody;
     public GameObject lastCake;
+
+    float cakeOffset;
 
     private void Awake()
     {
         cakeBody = this.transform.parent.gameObject;
-    }
 
-    private void Start()
-    {
         gameController = GameObject.Find("GameController");
 
         lastCake = gameController.GetComponent<GameController>().getLastCake();
+
+        canvas = GameObject.Find("Canvas");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (cakeBalance)
+        if (lastCake != null)
+        {
+            cakeOffset = Mathf.Abs(cakeBody.transform.position.x - lastCake.transform.position.x);
+            Debug.Log(cakeOffset);
+        }
+
+        if (lastCake == null || cakeOffset < 1f)
         {
             //plays the bounce animation
             cakeBody.GetComponentInChildren<Animator>().SetTrigger("bounce");
+            GameObject thisSplat = Instantiate(cakeSplat, cakeBody.transform.position, Quaternion.identity);
+            thisSplat.transform.position -= new Vector3(0, 0.3f, 0);
+
+            //points
+            Instantiate(points, canvas.transform);
+
 
             cakeBody.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 
-            if(lastCake != null)
+            if (lastCake != null)
             {
                 cakeBody.AddComponent<FixedJoint2D>();
                 cakeBody.GetComponent<FixedJoint2D>().connectedBody = lastCake.GetComponent<Rigidbody2D>();
+            }
+            else
+            {
+                cakeBody.AddComponent<FixedJoint2D>();
+                cakeBody.GetComponent<FixedJoint2D>().connectedBody = GameObject.Find("Ground").GetComponent<Rigidbody2D>();
+            }
+
+            if(cakeBody.transform.position.y > -2)
+            {
+                GameObject.Find("Main Camera").GetComponent<cameraController>().moveCamera();
             }
 
             gameController.GetComponent<GameController>().setLastCake(cakeBody);
         }
         else
         {
-            //cake falls
+            cakeBody.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         }
     }
 }
