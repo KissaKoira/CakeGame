@@ -79,12 +79,28 @@ public class GameController : MonoBehaviour
                 //swipe left
                 if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
                 {
-                   
+                    currentCake = rightCake;
+
+                    rightCake = null;
+
+                    currentCake.GetComponent<Animator>().SetTrigger("moveRight");
+
+                    cakeFrom = "right";
+
+                    createCake();
                 }
                 //swipe right
                 if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
                 {
-                   
+                    currentCake = leftCake;
+
+                    leftCake = null;
+
+                    currentCake.GetComponent<Animator>().SetTrigger("moveLeft");
+
+                    cakeFrom = "left";
+
+                    createCake();
                 }
             }
         }
