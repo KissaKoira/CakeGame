@@ -41,6 +41,7 @@ public class collision : MonoBehaviour
             cakeBody.GetComponentInChildren<Animator>().SetTrigger("bounce");
             GameObject thisSplat = Instantiate(cakeSplat, cakeBody.transform.position, Quaternion.identity);
             thisSplat.transform.position -= new Vector3(0, 0.3f, 0);
+            thisSplat.transform.eulerAngles = new Vector3(-90, 0, 0);
 
             //points
             Instantiate(points, canvas.transform);
