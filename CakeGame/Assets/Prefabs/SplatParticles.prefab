@@ -745,9 +745,9 @@ ParticleSystem:
     m_TextureBilinearFiltering: 0
     randomDirectionAmount: 0
     sphericalDirectionAmount: 0
-    randomPositionAmount: 1
+    randomPositionAmount: 0.6
     radius:
-      value: 1
+      value: 2
       mode: 0
       spread: 0
       speed:
