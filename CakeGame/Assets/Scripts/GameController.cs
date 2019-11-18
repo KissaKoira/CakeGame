@@ -246,4 +246,16 @@ public class GameController : MonoBehaviour
     {
         return lastCake;
     }
+
+    private GameObject[] cakes = new GameObject[10];
+
+    public void setCakes(GameObject[] newCakes)
+    {
+        cakes = newCakes;
+    }
+
+    public GameObject[] getCakes()
+    {
+        return cakes;
+    }
 }

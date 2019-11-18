@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class cameraController : MonoBehaviour
 {
-    GameObject ground;
-    float p2 = -4.86f;
+    GameObject anchor;
+    float p2 = -4f;
 
     // Start is called before the first frame update
     void Start()
     {
-        ground = GameObject.Find("Ground");
+        anchor = GameObject.Find("Ground");
     }
 
     // Update is called once per frame
     void Update()
     {
-        ground.GetComponent<Rigidbody2D>().MovePosition(new Vector2(0, ground.transform.position.y + (p2 - ground.transform.position.y) * Time.deltaTime * 5));
+        anchor.GetComponent<Rigidbody2D>().MovePosition(new Vector2(anchor.transform.position.x, anchor.transform.position.y + (p2 - anchor.transform.position.y) * Time.deltaTime * 5));
     }
 
-    public void moveCamera()
+    public void moveCamera(GameObject newAnchor)
     {
-        p2 = ground.transform.position.y - 1;
+        anchor = newAnchor;
+        p2 = anchor.transform.position.y - 1;
     }
 }
