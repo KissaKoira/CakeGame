@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class cameraController : MonoBehaviour
 {
-<<<<<<< HEAD
     GameObject anchor;
-=======
-    GameObject ground;
->>>>>>> 1ce407b4594cfdb90e7a8c6303a2bca271c99726
     float p2 = -4f;
 
     // Start is called before the first frame update
