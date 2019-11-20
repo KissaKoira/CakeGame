@@ -9,6 +9,7 @@ public class splatController : MonoBehaviour
     private void Start()
     {
         counter = 1;
+        FindObjectOfType<AudioManager>().Play("CakeLand");
     }
 
     void Update()
