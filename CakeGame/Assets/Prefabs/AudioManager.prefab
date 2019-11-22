@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3251025556972269649}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6383302, y: 0.9959276, z: -89.27734}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,12 +47,25 @@ MonoBehaviour:
   - name: CakeLand
     clip: {fileID: 8300000, guid: bbc04bc27d7178a4c831494fc018564e, type: 3}
     volume: 1
+    volumeRandom: 0
     pitch: 1
+    pitchRandom: 0
     loop: 0
     source: {fileID: 0}
   - name: March1
     clip: {fileID: 8300000, guid: ed15373ccc7def74699ab10c36e9fab0, type: 3}
     volume: 0.5
+    volumeRandom: 0
     pitch: 1
+    pitchRandom: 0
     loop: 0
     source: {fileID: 0}
+  music: []
+  currentMusic:
+    name: 
+    clip: {fileID: 0}
+    volume: 1
+    useLoopPoint: 0
+    loopPoint: 0
+    source: {fileID: 0}
+  initialMusic: 

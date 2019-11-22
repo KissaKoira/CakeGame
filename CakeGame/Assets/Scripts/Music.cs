@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Sound
+public class Music
 {
     public string name;
 
@@ -12,14 +12,10 @@ public class Sound
 
     [Range(0f, 1f)]
     public float volume = 1;
-    [Range(0f, 1f)]
-    public float volumeRandom;
-    [Range(.1f, 3f)]
-    public float pitch = 1;
-    [Range(0f, 1f)]
-    public float pitchRandom;
 
-    public bool loop;
+    public bool syncTime;
+    public bool useLoopPoint;
+    public float loopPoint;
 
     [HideInInspector]
     public AudioSource source;
