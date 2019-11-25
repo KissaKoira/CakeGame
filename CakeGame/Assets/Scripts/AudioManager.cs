@@ -2,7 +2,6 @@
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using UnityEditor.AnimatedValues;
 using DG.Tweening;
 
 public class AudioManager : MonoBehaviour

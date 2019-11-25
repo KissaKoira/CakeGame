@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
                     return 0;
                 }
                 //swipe left
-                if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                if ((currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f) && currentCake == null)
                 {
                     currentCake = rightCake;
 
@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour
                     createCake();
                 }
                 //swipe right
-                if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                if ((currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f) && currentCake == null)
                 {
                     currentCake = leftCake;
 
