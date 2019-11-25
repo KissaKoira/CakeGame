@@ -20,6 +20,8 @@ public class collision : MonoBehaviour
 
     private GameObject anchor;
 
+    private float counter = 0;
+
     private void Awake()
     {
         cakeBody = this.transform.parent.gameObject;
@@ -132,6 +134,7 @@ public class collision : MonoBehaviour
         else
         {
             cakeBody.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            cakeBody.transform.GetChild(1).GetComponent<Animator>().SetTrigger("fade");
         }
     }
 }

@@ -133,7 +133,7 @@ public class GameController : MonoBehaviour
             rotation = -0.3f;
         }
 
-        cake.transform.Rotate(new Vector3(0, 0, rotation * Time.deltaTime * 350));
+        cake.transform.Rotate(new Vector3(0, 0, rotation * Time.deltaTime * 500));
 
         if(Mathf.Abs(cake.transform.rotation.z) < 0.03f)
         {
