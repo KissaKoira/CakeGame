@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 2946886350664905076}
   - component: {fileID: 6378291586341782254}
   - component: {fileID: 4224388378378066254}
+  - component: {fileID: 5148588159764961819}
   m_Layer: 0
   m_Name: Cake
   m_TagString: Untagged
@@ -448,6 +449,18 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 0
+--- !u!114 &5148588159764961819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2518055499048273257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e1d599fdc2ddc949af9396b4f16139f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4299872649789003718
 GameObject:
   m_ObjectHideFlags: 0

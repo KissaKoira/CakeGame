@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public Sprite[] cakeSprites;
+    public Sprite[] outlineSprites;
+    public string[] cakeColors;
+
     //object prefabs
     public GameObject cakePref;
 
@@ -30,12 +34,22 @@ public class GameController : MonoBehaviour
         if(rightCake == null)
         {
             rightCake = Instantiate(cakePref, cakePos, Quaternion.identity);
+
+            int random = (int)Random.Range(0, 7.999f);
+            rightCake.transform.GetChild(2).GetComponent<cakeController>().cake = cakeSprites[random];
+            rightCake.transform.GetChild(2).GetComponent<cakeController>().outline = outlineSprites[random];
+
             rightCake.GetComponent<Animator>().SetTrigger("spawnRight");
         }
 
         if(leftCake == null)
         {
             leftCake = Instantiate(cakePref, cakePos, Quaternion.identity);
+
+            int random = (int)Random.Range(0, 7.999f);
+            leftCake.transform.GetChild(2).GetComponent<cakeController>().cake = cakeSprites[random];
+            leftCake.transform.GetChild(2).GetComponent<cakeController>().outline = outlineSprites[random];
+
             leftCake.GetComponent<Animator>().SetTrigger("spawnLeft");
         }
     }
