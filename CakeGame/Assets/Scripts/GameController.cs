@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class GameController : MonoBehaviour
     private float cakeRot;
 
     private bool animationActive = true;
+
+    public GameObject pointMeter;
+    public float points;
 
     //creates a new cake if a cake is missing
     private void createCake()
@@ -162,6 +166,8 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        pointMeter.GetComponent<TextMeshProUGUI>().SetText(points.ToString());
+
         //swipe controls
         Swipe();
 

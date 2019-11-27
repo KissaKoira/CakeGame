@@ -105,6 +105,8 @@ public class collision : MonoBehaviour
             //points
             Instantiate(points, canvas.transform);
 
+            gameController.GetComponent<GameController>().points += 100;
+
             cakeBody.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 
             if (lastCake != null)
