@@ -27,10 +27,12 @@ public class GameController : MonoBehaviour
     private Vector3 cakePos;
     private float cakeRot;
 
-    private bool animationActive = true;
+    private bool animationActive = false;
 
     public GameObject pointMeter;
     public float points;
+
+    public GameObject firstCake;
 
     //creates a new cake if a cake is missing
     private void createCake()
@@ -133,6 +135,8 @@ public class GameController : MonoBehaviour
 
         //creates the first cakes
         createCake();
+
+        currentCake = firstCake;
     }
 
     GameObject droppingCake;
