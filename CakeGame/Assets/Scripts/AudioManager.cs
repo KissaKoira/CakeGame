@@ -9,8 +9,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
     public Music[] music;
 
-    [HideInInspector]
-    private Music currentMusic;
+    public Music currentMusic;
     private Music nextMusic;
 
     public string initialMusic;
@@ -29,6 +28,8 @@ public class AudioManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        currentMusic = null;
 
         //Create AudioSources from sounds array
         foreach (Sound s in sounds)

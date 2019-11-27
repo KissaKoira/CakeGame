@@ -47,24 +47,60 @@ MonoBehaviour:
   - name: CakeLand
     clip: {fileID: 8300000, guid: bbc04bc27d7178a4c831494fc018564e, type: 3}
     volume: 1
+    volumeRandom: 0.2
+    pitch: 1
+    pitchRandom: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: FeverStart
+    clip: {fileID: 8300000, guid: fa708fa5e1706514180719e691c39057, type: 3}
+    volume: 0.3
     volumeRandom: 0
     pitch: 1
     pitchRandom: 0
     loop: 0
+    source: {fileID: 0}
+  music:
+  - name: Intro1
+    clip: {fileID: 8300000, guid: a762dea590947ff428af4bcc9d772308, type: 3}
+    volume: 0.4
+    syncTime: 0
+    useLoopPoint: 1
+    loopPoint: 17
     source: {fileID: 0}
   - name: March1
     clip: {fileID: 8300000, guid: ed15373ccc7def74699ab10c36e9fab0, type: 3}
-    volume: 0.5
-    volumeRandom: 0
-    pitch: 1
-    pitchRandom: 0
-    loop: 0
+    volume: 0.6
+    syncTime: 1
+    useLoopPoint: 0
+    loopPoint: 0
     source: {fileID: 0}
-  music: []
+  - name: March2
+    clip: {fileID: 8300000, guid: 2b1e1cdd4cc7e304abb6da1dd573fca2, type: 3}
+    volume: 0.5
+    syncTime: 1
+    useLoopPoint: 0
+    loopPoint: 0
+    source: {fileID: 0}
+  - name: March3
+    clip: {fileID: 8300000, guid: b28aaa640de184d47bba6f155178dd2e, type: 3}
+    volume: 0.5
+    syncTime: 1
+    useLoopPoint: 0
+    loopPoint: 0
+    source: {fileID: 0}
+  - name: FeverMarch
+    clip: {fileID: 8300000, guid: 88b319b76e319d64eb90672ee8668cb7, type: 3}
+    volume: 0.3
+    syncTime: 1
+    useLoopPoint: 0
+    loopPoint: 0
+    source: {fileID: 0}
   currentMusic:
     name: 
     clip: {fileID: 0}
     volume: 1
+    syncTime: 0
     useLoopPoint: 0
     loopPoint: 0
     source: {fileID: 0}
