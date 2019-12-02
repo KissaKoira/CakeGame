@@ -38,15 +38,50 @@ public class GameController : MonoBehaviour
     //creates a new cake if a cake is missing
     private void createCake()
     {
-        if(rightCake == null)
+        int random = (int)Random.Range(0, 127.999f);
+        int index = 0;
+
+        if (random > 64)
+        {
+            index = 0;
+        }
+        else if (random > 32)
+        {
+            index = 1;
+        }
+        else if (random > 16)
+        {
+            index = 2;
+        }
+        else if (random > 8)
+        {
+            index = 3;
+        }
+        else if (random > 4)
+        {
+            index = 4;
+        }
+        else if (random > 2)
+        {
+            index = 5;
+        }
+        else if (random > 1)
+        {
+            index = 6;
+        }
+        else
+        {
+            index = 7;
+        }
+
+        if (rightCake == null)
         {
             rightCake = Instantiate(cakePref, cakePos, Quaternion.identity);
 
-            int random = (int)Random.Range(0, 7.999f);
             GameObject newCake = rightCake.transform.GetChild(2).gameObject;
-            newCake.GetComponent<cakeController>().cake = cakeSprites[random];
-            newCake.GetComponent<cakeController>().outline = outlineSprites[random];
-            newCake.GetComponent<cakeController>().points = cakePoints[random];
+            newCake.GetComponent<cakeController>().cake = cakeSprites[index];
+            newCake.GetComponent<cakeController>().outline = outlineSprites[index];
+            newCake.GetComponent<cakeController>().points = cakePoints[index];
 
             rightCake.GetComponent<Animator>().SetTrigger("spawnRight");
         }
@@ -55,11 +90,10 @@ public class GameController : MonoBehaviour
         {
             leftCake = Instantiate(cakePref, cakePos, Quaternion.identity);
 
-            int random = (int)Random.Range(0, 7.999f);
             GameObject newCake = leftCake.transform.GetChild(2).gameObject;
-            newCake.GetComponent<cakeController>().cake = cakeSprites[random];
-            newCake.GetComponent<cakeController>().outline = outlineSprites[random];
-            newCake.GetComponent<cakeController>().points = cakePoints[random];
+            newCake.GetComponent<cakeController>().cake = cakeSprites[index];
+            newCake.GetComponent<cakeController>().outline = outlineSprites[index];
+            newCake.GetComponent<cakeController>().points = cakePoints[index];
 
             leftCake.GetComponent<Animator>().SetTrigger("spawnLeft");
         }

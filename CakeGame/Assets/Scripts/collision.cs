@@ -14,6 +14,7 @@ public class collision : MonoBehaviour
     public GameObject combo1;
     public GameObject combo2;
     public GameObject combo3;
+    public GameObject perfect;
 
     private GameObject cakeBody;
     public GameObject lastCake;
@@ -91,11 +92,11 @@ public class collision : MonoBehaviour
 
         if (lastCake != null)
         {
-            cakeOffset = Mathf.Abs(cakeBody.transform.position.x - lastCake.transform.position.x);
+            cakeOffset = cakeBody.transform.position.x - lastCake.transform.position.x;
             Debug.Log(cakeOffset);
         }
 
-        if (lastCake == null || cakeOffset < 1f)
+        if (lastCake == null || Mathf.Abs(cakeOffset) < 1f)
         {
             limitCakes(cakeBody);
 
@@ -107,6 +108,13 @@ public class collision : MonoBehaviour
             thisSplat.transform.position -= new Vector3(0, 0.3f, 0);
             thisSplat.transform.eulerAngles = new Vector3(-90, 0, 0);
 
+            //perfect
+            if(lastCake != null && Mathf.Abs(cakeOffset) < 0.2f)
+            {
+                cakeBody.transform.position -= new Vector3(cakeOffset, 0, 0);
+                Instantiate(perfect, canvas.transform);
+            }
+
             //combo
             float factor = 1;
 
@@ -114,23 +122,19 @@ public class collision : MonoBehaviour
             {
                 if(lastCake.GetComponent<cakeController>().cake == cakeBody.GetComponent<cakeController>().cake)
                 {
-                    GameObject elem;
 
                     switch (gameController.getComboCounter())
                     {
                         case 0:
-                            elem = Instantiate(combo1, canvas.transform);
-                            elem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 150);
+                            Instantiate(combo1, canvas.transform);
                             factor = 1.5f;
                             break;
                         case 1:
-                            elem = Instantiate(combo2, canvas.transform);
-                            elem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 150);
+                            Instantiate(combo2, canvas.transform);
                             factor = 2;
                             break;
-                        case 2:
-                            elem = Instantiate(combo3, canvas.transform);
-                            elem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 150);
+                        default:
+                            Instantiate(combo3, canvas.transform);
                             factor = 3;
                             break;
                     }
