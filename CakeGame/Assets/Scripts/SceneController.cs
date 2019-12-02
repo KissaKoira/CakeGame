@@ -24,19 +24,37 @@ public class SceneController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void GoToScene(string name)
+    public void GoToScene(string newScene)
     {
-        if (SceneManager.GetActiveScene().name != currentSceneName)
+        Debug.Log(newScene);
+        if (SceneManager.GetActiveScene().name != newScene)
         {
-            SceneManager.LoadScene(name);
+            Debug.Log("Start loading scene: " + newScene);
+            SceneManager.LoadScene(newScene, LoadSceneMode.Single);
             SceneManager.sceneLoaded += OnSceneLoaded;
+            currentSceneName = newScene;
         }
+    }
+
+    public void ToGame()
+    {
+        //FindObjectOfType<LoadingScreen>().gameObject.SetActive(true);
+        FindObjectOfType<AudioManager>().PlayMusic("March1");
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
+        currentSceneName = "Main";
+    }
+
+    public void ToMenu()
+    {
+        //FindObjectOfType<LoadingScreen>().gameObject.SetActive(true);
+        FindObjectOfType<AudioManager>().PlayMusic("Intro1");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        currentSceneName = "MainMenu";
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        currentSceneName = name;
-        Debug.Log("Loaded scene " + name);
+        Debug.Log("Loaded scene: " + currentSceneName);
     }
 
     public void RestartCurrentScene()
