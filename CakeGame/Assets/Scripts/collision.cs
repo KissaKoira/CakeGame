@@ -109,16 +109,19 @@ public class collision : MonoBehaviour
             thisSplat.transform.eulerAngles = new Vector3(-90, 0, 0);
 
             //perfect
-            if(lastCake != null && Mathf.Abs(cakeOffset) < 0.2f)
+            float pFactor = 1;
+
+            if (lastCake != null && Mathf.Abs(cakeOffset) < 0.2f)
             {
                 cakeBody.transform.position -= new Vector3(cakeOffset, 0, 0);
                 Instantiate(perfect, canvas.transform);
+                pFactor = 2;
             }
 
             //combo
-            float factor = 1;
+            float cFactor = 1;
 
-            if(lastCake != null)
+            if (lastCake != null)
             {
                 if(lastCake.GetComponent<cakeController>().cake == cakeBody.GetComponent<cakeController>().cake)
                 {
@@ -127,15 +130,15 @@ public class collision : MonoBehaviour
                     {
                         case 0:
                             Instantiate(combo1, canvas.transform);
-                            factor = 1.5f;
+                            cFactor = 1.5f;
                             break;
                         case 1:
                             Instantiate(combo2, canvas.transform);
-                            factor = 2;
+                            cFactor = 2;
                             break;
                         default:
                             Instantiate(combo3, canvas.transform);
-                            factor = 3;
+                            cFactor = 3;
                             break;
                     }
 
@@ -148,7 +151,7 @@ public class collision : MonoBehaviour
             }
 
             //points
-            float newPoints = cakeBody.GetComponent<cakeController>().points * factor;
+            float newPoints = cakeBody.GetComponent<cakeController>().points * pFactor * cFactor;
             GameObject newPointElem = Instantiate(points, canvas.transform);
             newPointElem.GetComponentInChildren<TextMeshProUGUI>().text = newPoints.ToString();
             gameController.points += newPoints;
@@ -184,6 +187,10 @@ public class collision : MonoBehaviour
         {
             cakeBody.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             cakeBody.transform.GetChild(1).GetComponent<Animator>().SetTrigger("fade");
+
+            gameController.setHealth(gameController.getHealth() - 1);
         }
+
+        Debug.Log("Health: " + gameController.getHealth());
     }
 }

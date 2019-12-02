@@ -333,4 +333,16 @@ public class GameController : MonoBehaviour
     {
         return comboCounter;
     }
+
+    private int health = 3;
+
+    public void setHealth(int num)
+    {
+        health = num;
+    }
+
+    public int getHealth()
+    {
+        return health;
+    }
 }
