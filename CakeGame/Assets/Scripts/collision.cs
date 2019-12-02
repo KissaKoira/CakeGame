@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class collision : MonoBehaviour
 {
-    GameObject gameController;
+    GameController gameController;
 
     public GameObject cakeSplat;
 
     public GameObject canvas;
     public GameObject points;
+    public GameObject combo1;
+    public GameObject combo2;
+    public GameObject combo3;
 
     private GameObject cakeBody;
     public GameObject lastCake;
@@ -26,9 +30,9 @@ public class collision : MonoBehaviour
     {
         cakeBody = this.transform.parent.gameObject;
 
-        gameController = GameObject.Find("GameController");
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
-        lastCake = gameController.GetComponent<GameController>().getLastCake();
+        lastCake = gameController.getLastCake();
 
         canvas = GameObject.Find("Canvas");
 
@@ -37,7 +41,7 @@ public class collision : MonoBehaviour
 
     private void limitCakes(GameObject newCake)
     {
-        cakes = gameController.GetComponent<GameController>().getCakes();
+        cakes = gameController.getCakes();
 
         for (int i = cakes.Length - 1; i >= 0; i--)
         {
@@ -71,7 +75,7 @@ public class collision : MonoBehaviour
             }
         }
 
-        gameController.GetComponent<GameController>().setCakes(cakes);
+        gameController.setCakes(cakes);
     }
 
     private void setAnchor(GameObject newAnchor)
@@ -98,14 +102,52 @@ public class collision : MonoBehaviour
             //plays the bounce animation
             cakeBody.GetComponentInChildren<Animator>().SetTrigger("bounce");
 
+            //splat effect
             GameObject thisSplat = Instantiate(cakeSplat, cakeBody.transform.position, Quaternion.identity);
             thisSplat.transform.position -= new Vector3(0, 0.3f, 0);
             thisSplat.transform.eulerAngles = new Vector3(-90, 0, 0);
 
-            //points
-            Instantiate(points, canvas.transform);
+            //combo
+            float factor = 1;
 
-            gameController.GetComponent<GameController>().points += 100;
+            if(lastCake != null)
+            {
+                if(lastCake.GetComponent<cakeController>().cake == cakeBody.GetComponent<cakeController>().cake)
+                {
+                    GameObject elem;
+
+                    switch (gameController.getComboCounter())
+                    {
+                        case 0:
+                            elem = Instantiate(combo1, canvas.transform);
+                            elem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 150);
+                            factor = 1.5f;
+                            break;
+                        case 1:
+                            elem = Instantiate(combo2, canvas.transform);
+                            elem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 150);
+                            factor = 2;
+                            break;
+                        case 2:
+                            elem = Instantiate(combo3, canvas.transform);
+                            elem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 150);
+                            factor = 3;
+                            break;
+                    }
+
+                    gameController.setComboCounter(gameController.getComboCounter() + 1);
+                }
+                else
+                {
+                    gameController.setComboCounter(0);
+                }
+            }
+
+            //points
+            float newPoints = cakeBody.GetComponent<cakeController>().points * factor;
+            GameObject newPointElem = Instantiate(points, canvas.transform);
+            newPointElem.GetComponentInChildren<TextMeshProUGUI>().text = newPoints.ToString();
+            gameController.points += newPoints;
 
             cakeBody.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 
@@ -132,7 +174,7 @@ public class collision : MonoBehaviour
                 }
             }
 
-            gameController.GetComponent<GameController>().setLastCake(cakeBody);            
+            gameController.setLastCake(cakeBody);            
         }
         else
         {

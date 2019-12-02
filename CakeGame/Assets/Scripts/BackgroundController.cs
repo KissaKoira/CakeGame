@@ -18,7 +18,7 @@ public class BackgroundController : MonoBehaviour
     void Update()
     {
         bgY = positionReferenceObject.transform.position.y / positionReferenceObject.GetComponent<Parallax>().parallaxEffectY;
-        Debug.Log(FindObjectOfType<AudioManager>().currentMusic.name);
+        //Debug.Log(FindObjectOfType<AudioManager>().currentMusic.name);
         //Debug.Log(bgY);
 
         if (bgLvl == 0 && bgY < -10f)

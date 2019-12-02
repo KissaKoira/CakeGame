@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public Sprite[] cakeSprites;
     public Sprite[] outlineSprites;
     public string[] cakeColors;
+    public int[] cakePoints;
 
     //object prefabs
     public GameObject cakePref;
@@ -42,8 +43,10 @@ public class GameController : MonoBehaviour
             rightCake = Instantiate(cakePref, cakePos, Quaternion.identity);
 
             int random = (int)Random.Range(0, 7.999f);
-            rightCake.transform.GetChild(2).GetComponent<cakeController>().cake = cakeSprites[random];
-            rightCake.transform.GetChild(2).GetComponent<cakeController>().outline = outlineSprites[random];
+            GameObject newCake = rightCake.transform.GetChild(2).gameObject;
+            newCake.GetComponent<cakeController>().cake = cakeSprites[random];
+            newCake.GetComponent<cakeController>().outline = outlineSprites[random];
+            newCake.GetComponent<cakeController>().points = cakePoints[random];
 
             rightCake.GetComponent<Animator>().SetTrigger("spawnRight");
         }
@@ -53,8 +56,10 @@ public class GameController : MonoBehaviour
             leftCake = Instantiate(cakePref, cakePos, Quaternion.identity);
 
             int random = (int)Random.Range(0, 7.999f);
-            leftCake.transform.GetChild(2).GetComponent<cakeController>().cake = cakeSprites[random];
-            leftCake.transform.GetChild(2).GetComponent<cakeController>().outline = outlineSprites[random];
+            GameObject newCake = leftCake.transform.GetChild(2).gameObject;
+            newCake.GetComponent<cakeController>().cake = cakeSprites[random];
+            newCake.GetComponent<cakeController>().outline = outlineSprites[random];
+            newCake.GetComponent<cakeController>().points = cakePoints[random];
 
             leftCake.GetComponent<Animator>().SetTrigger("spawnLeft");
         }
@@ -281,5 +286,17 @@ public class GameController : MonoBehaviour
     public GameObject[] getCakes()
     {
         return cakes;
+    }
+
+    private int comboCounter;
+
+    public void setComboCounter(int num)
+    {
+        comboCounter = num;
+    }
+
+    public int getComboCounter()
+    {
+        return comboCounter;
     }
 }

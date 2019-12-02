@@ -74,6 +74,9 @@ MonoBehaviour:
     type: 3}
   canvas: {fileID: 0}
   points: {fileID: 8477974195462931559, guid: 182ffb7384d12ef48bb84b6d281aa85a, type: 3}
+  combo1: {fileID: 1905126302010747496, guid: 5bda0927c978b9f449863e0a67e038e7, type: 3}
+  combo2: {fileID: 1905126302010747496, guid: f98e72af1f5bef04396ae8abcfefeb06, type: 3}
+  combo3: {fileID: 1905126302010747496, guid: dc793f32e55e1084fae9561bec1c7a52, type: 3}
   lastCake: {fileID: 0}
 --- !u!1 &685418325386008242
 GameObject:
@@ -461,6 +464,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1d599fdc2ddc949af9396b4f16139f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  points: 0
+  cake: {fileID: 0}
+  outline: {fileID: 0}
 --- !u!1 &4299872649789003718
 GameObject:
   m_ObjectHideFlags: 0
