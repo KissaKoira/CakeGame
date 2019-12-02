@@ -9,6 +9,12 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
     public Music[] music;
 
+    public AudioMixerGroup soundMixer;
+    public AudioMixerGroup musicMixer;
+
+    public bool soundMute;
+    public bool musicMute;
+
     public Music currentMusic;
     private Music nextMusic;
 
@@ -40,6 +46,8 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+
+            s.source.outputAudioMixerGroup = soundMixer;
         }
         foreach (Music s in music)
         {
@@ -48,6 +56,8 @@ public class AudioManager : MonoBehaviour
 
             s.source.volume = s.volume;
             s.source.loop = !s.useLoopPoint;
+
+            s.source.outputAudioMixerGroup = musicMixer;
         }
     }
 
@@ -96,12 +106,51 @@ public class AudioManager : MonoBehaviour
             currentMusic = nextMusic;
         }
     }
+
+    public void ToggleSoundMute()
+    {
+        if (soundMute)
+        {
+            soundMixer.audioMixer.SetFloat("volumeSounds", 0f);
+            soundMute = false;
+        }
+        else
+        {
+            soundMixer.audioMixer.SetFloat("volumeSounds", -80f);
+            soundMute = true;
+        }
+    }
+
+    public void ToggleMusicMute()
+    {
+        if (musicMute)
+        {
+            musicMixer.audioMixer.SetFloat("volumeMusic", 0f);
+            musicMute = false;
+        }
+        else
+        {
+            musicMixer.audioMixer.SetFloat("volumeMusic", -80f);
+            musicMute = true;
+        }
+    }
+
     public void Update()
     {
         if (currentMusic.useLoopPoint && currentMusic.source.time >= currentMusic.source.clip.length)
         {
             currentMusic.source.Play();
             currentMusic.source.time = currentMusic.loopPoint;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ToggleSoundMute();
+        }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            ToggleMusicMute();
         }
     }
 }

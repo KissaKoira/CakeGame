@@ -96,6 +96,12 @@ MonoBehaviour:
     useLoopPoint: 0
     loopPoint: 0
     source: {fileID: 0}
+  soundMixer: {fileID: -8586999978252818417, guid: 19ca253fdcb23ea459c9d433da6343ab,
+    type: 2}
+  musicMixer: {fileID: -9177979409998256504, guid: 19ca253fdcb23ea459c9d433da6343ab,
+    type: 2}
+  soundMute: 0
+  musicMute: 0
   currentMusic:
     name: 
     clip: {fileID: 0}
@@ -104,4 +110,4 @@ MonoBehaviour:
     useLoopPoint: 0
     loopPoint: 0
     source: {fileID: 0}
-  initialMusic: 
+  initialMusic: Intro1
