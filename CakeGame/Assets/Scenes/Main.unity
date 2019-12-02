@@ -1067,23 +1067,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cakeSprites:
-  - {fileID: -3485882861660969542, guid: e7ec03af195fc234a8ea18caad260ffc, type: 3}
-  - {fileID: 7662844379496509696, guid: 8bb3561b091dc404096d916d22c0cd1e, type: 3}
-  - {fileID: -2274865190711063104, guid: f9a06379774dd3041be1db677c6b324b, type: 3}
   - {fileID: 8195648486988480944, guid: 4f25b6aeb39245d46a1b187575ccec28, type: 3}
-  - {fileID: -7628134937359640947, guid: 230eefd524fa04944a7c3f3e3261913e, type: 3}
+  - {fileID: -2274865190711063104, guid: f9a06379774dd3041be1db677c6b324b, type: 3}
   - {fileID: -3851160961395449136, guid: a261a50939c506141992c61741862329, type: 3}
   - {fileID: 2958035014141835277, guid: e7d5fe0f9ee24484cbaa44f6336a5cba, type: 3}
+  - {fileID: 7662844379496509696, guid: 8bb3561b091dc404096d916d22c0cd1e, type: 3}
+  - {fileID: -7628134937359640947, guid: 230eefd524fa04944a7c3f3e3261913e, type: 3}
   - {fileID: 2551981059966941832, guid: 5b42c36e2315ac740bfcb10863da5069, type: 3}
+  - {fileID: -3485882861660969542, guid: e7ec03af195fc234a8ea18caad260ffc, type: 3}
   outlineSprites:
-  - {fileID: -1382222564974388734, guid: e7ec03af195fc234a8ea18caad260ffc, type: 3}
-  - {fileID: 7549869643161746217, guid: 8bb3561b091dc404096d916d22c0cd1e, type: 3}
-  - {fileID: -3603047569934056118, guid: f9a06379774dd3041be1db677c6b324b, type: 3}
   - {fileID: 5596051569631739291, guid: 4f25b6aeb39245d46a1b187575ccec28, type: 3}
-  - {fileID: 6024963119791013176, guid: 230eefd524fa04944a7c3f3e3261913e, type: 3}
+  - {fileID: -3603047569934056118, guid: f9a06379774dd3041be1db677c6b324b, type: 3}
   - {fileID: 3603531528739420103, guid: a261a50939c506141992c61741862329, type: 3}
   - {fileID: 83408177202868992, guid: e7d5fe0f9ee24484cbaa44f6336a5cba, type: 3}
+  - {fileID: 7549869643161746217, guid: 8bb3561b091dc404096d916d22c0cd1e, type: 3}
+  - {fileID: 6024963119791013176, guid: 230eefd524fa04944a7c3f3e3261913e, type: 3}
   - {fileID: 454663758622387055, guid: 5b42c36e2315ac740bfcb10863da5069, type: 3}
+  - {fileID: -1382222564974388734, guid: e7ec03af195fc234a8ea18caad260ffc, type: 3}
   cakeColors:
   - 
   - 
@@ -1093,6 +1093,7 @@ MonoBehaviour:
   - 
   - 
   - 
+  cakePoints: 320000006400000096000000c8000000fa0000002c0100005e01000090010000
   cakePref: {fileID: 4299872650981560678, guid: 100d04abadb3413489ed42e603b7a0c5,
     type: 3}
   pointMeter: {fileID: 1621521993}
@@ -2384,7 +2385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1d599fdc2ddc949af9396b4f16139f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 0
+  points: 50
   cake: {fileID: 8195648486988480944, guid: 4f25b6aeb39245d46a1b187575ccec28, type: 3}
   outline: {fileID: 5596051569631739291, guid: 4f25b6aeb39245d46a1b187575ccec28, type: 3}
 --- !u!1 &5257220750249996103
@@ -2627,6 +2628,10 @@ MonoBehaviour:
     type: 3}
   canvas: {fileID: 0}
   points: {fileID: 8477974195462931559, guid: 182ffb7384d12ef48bb84b6d281aa85a, type: 3}
+  combo1: {fileID: 0}
+  combo2: {fileID: 0}
+  combo3: {fileID: 0}
+  perfect: {fileID: 1905126302010747496, guid: 63ec53994ede4314293c8c1690ea5062, type: 3}
   lastCake: {fileID: 0}
 --- !u!1 &7053262663019214833
 GameObject:
