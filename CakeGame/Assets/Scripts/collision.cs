@@ -108,6 +108,12 @@ public class collision : MonoBehaviour
             thisSplat.transform.position -= new Vector3(0, 0.3f, 0);
             thisSplat.transform.eulerAngles = new Vector3(-90, 0, 0);
 
+            if (lastCake != null) { 
+                thisSplat.GetComponent<ParticleSystem>().startColor = lastCake.GetComponent<cakeController>().colors;
+            } else {
+                thisSplat.GetComponent<ParticleSystem>().startColor = cakeBody.GetComponent<cakeController>().colors;
+            }
+
             //perfect
             float pFactor = 1;
 

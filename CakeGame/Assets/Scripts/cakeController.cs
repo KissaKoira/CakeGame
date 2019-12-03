@@ -7,6 +7,7 @@ public class cakeController : MonoBehaviour
     public float points;
     public Sprite cake;
     public Sprite outline;
+    public Color colors;
 
     private void Start()
     {

@@ -7,8 +7,8 @@ public class GameController : MonoBehaviour
 {
     public Sprite[] cakeSprites;
     public Sprite[] outlineSprites;
-    public string[] cakeColors;
     public int[] cakePoints;
+    public Color[] cakeColors;
 
     //object prefabs
     public GameObject cakePref;
@@ -83,6 +83,7 @@ public class GameController : MonoBehaviour
             newCake.GetComponent<cakeController>().cake = cakeSprites[index];
             newCake.GetComponent<cakeController>().outline = outlineSprites[index];
             newCake.GetComponent<cakeController>().points = cakePoints[index];
+            newCake.GetComponent<cakeController>().colors = cakeColors[index];
 
             rightCake.GetComponent<Animator>().SetTrigger("spawnRight");
         }
@@ -95,6 +96,7 @@ public class GameController : MonoBehaviour
             newCake.GetComponent<cakeController>().cake = cakeSprites[index];
             newCake.GetComponent<cakeController>().outline = outlineSprites[index];
             newCake.GetComponent<cakeController>().points = cakePoints[index];
+            newCake.GetComponent<cakeController>().colors = cakeColors[index];
 
             leftCake.GetComponent<Animator>().SetTrigger("spawnLeft");
         }
