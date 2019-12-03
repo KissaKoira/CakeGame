@@ -24,6 +24,7 @@ public class cameraController : MonoBehaviour
     public void moveCamera(GameObject newAnchor)
     {
         anchor = newAnchor;
+        anchorRigid = anchor.GetComponent<Rigidbody2D>();
         p2 = anchor.transform.position.y - 1;
     }
 }

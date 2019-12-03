@@ -26,12 +26,13 @@ public class GameController : MonoBehaviour
 
     //cake's object positions
     private Vector3 cakePos;
-    private float cakeRot;
 
     private bool animationActive = false;
 
     public GameObject pointMeter;
     public float points;
+
+    public float frenzy = 0;
 
     public GameObject firstCake;
 
@@ -170,7 +171,6 @@ public class GameController : MonoBehaviour
     {
         //sets the object positions at the start of the program
         cakePos = new Vector3(0, 7f, 0);
-        cakeRot = 0f;
 
         //creates the first cakes
         createCake();
@@ -210,6 +210,19 @@ public class GameController : MonoBehaviour
     void Update()
     {
         pointMeter.GetComponent<TextMeshProUGUI>().SetText(points.ToString());
+
+        if(frenzy > 0 && frenzy < 100)
+        {
+            frenzy -= Time.deltaTime * 3;
+        }
+        else if (frenzy >= 100)
+        {
+
+        }
+        else
+        {
+            frenzy = 0;
+        }
 
         //swipe controls
         Swipe();

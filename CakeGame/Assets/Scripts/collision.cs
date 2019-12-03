@@ -156,6 +156,8 @@ public class collision : MonoBehaviour
             newPointElem.GetComponentInChildren<TextMeshProUGUI>().text = newPoints.ToString();
             gameController.points += newPoints;
 
+            gameController.frenzy += (newPoints * 0.1f);
+
             cakeBody.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 
             if (lastCake != null)
