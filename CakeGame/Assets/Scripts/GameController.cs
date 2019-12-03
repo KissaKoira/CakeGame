@@ -32,7 +32,12 @@ public class GameController : MonoBehaviour
     public GameObject pointMeter;
     public float points;
 
+    public GameObject frenzyMeter;
     public float frenzy = 0;
+    public bool frenzyOn = false;
+    private float frenzyCounter = 0;
+
+    public GameObject feverEffect;
 
     public GameObject firstCake;
 
@@ -181,6 +186,7 @@ public class GameController : MonoBehaviour
     }
 
     GameObject droppingCake;
+    Vector3 lastDropPos;
 
     void dropCake(GameObject cake)
     {
@@ -207,24 +213,67 @@ public class GameController : MonoBehaviour
         velocity -= Time.deltaTime * 10;
 
         cake.GetComponent<Rigidbody2D>().velocity += new Vector2(0, velocity);
+
+        //frenzy magnet effect
+        if (frenzyOn)
+        {
+            Vector3 normDir = (lastCake.transform.position - lastDropPos).normalized;
+            if(Mathf.Abs(cake.transform.position.x - normDir.x) > 0.01f)
+            {
+                cake.transform.position += new Vector3(normDir.x * Time.deltaTime * 10, 0, 0);
+            }
+        }
     } 
 
     void Update()
     {
         pointMeter.GetComponent<TextMeshProUGUI>().SetText(points.ToString());
 
-        if(frenzy > 0 && frenzy < 100)
+        //frenzy mode
+        if (!frenzyOn)
         {
-            frenzy -= Time.deltaTime * 3;
-        }
-        else if (frenzy >= 100)
-        {
+            if (frenzy > 0 && frenzy < 100)
+            {
+                frenzy -= Time.deltaTime * 10;
+            }
+            else if (frenzy >= 100)
+            {
+                frenzy = 100;
+                frenzyOn = true;
 
+                frenzyCounter = 10;
+            }
+            else
+            {
+                frenzy = 0;
+                frenzyOn = false;
+            }
         }
-        else
+
+        frenzyMeter.transform.localScale = new Vector3( Mathf.Abs(frenzy - 100) / 100 * 0.23f + 0.28f, 1, 1);
+
+        if(frenzyCounter > 0)
         {
-            frenzy = 0;
+            frenzyCounter -= Time.deltaTime;
+
+            feverEffect.GetComponent<Animator>().SetBool("Fever", true);
         }
+        if(frenzyCounter <= 0 && frenzyOn)
+        {
+            feverEffect.GetComponent<Animator>().SetBool("Fever", false);
+
+            if (frenzy > 0)
+            {
+                frenzy -= Time.deltaTime * 50;
+            }
+            else
+            {
+                frenzyOn = false;
+                frenzyCounter = 0;
+            }
+        }
+
+        Debug.Log("frenzy: " + frenzy + " frenzyOn: " + frenzyOn + " frenzyCounter: " + frenzyCounter);
 
         //swipe controls
         Swipe();
@@ -246,7 +295,8 @@ public class GameController : MonoBehaviour
                 GameObject wrapper = currentCake;
                 currentCake = wrapper.transform.GetChild(2).gameObject;
 
-                Debug.Log(currentCake);
+                //latest cakes position when dropped, used in dropCake()
+                lastDropPos = currentCake.transform.position;
 
                 currentCake.transform.SetParent(null);
                 currentCake.GetComponent<HingeJoint2D>().enabled = false;
@@ -293,7 +343,7 @@ public class GameController : MonoBehaviour
 
         if (Input.GetButtonDown("test"))
         {
-            Debug.Log("test");
+            frenzy = 100;
         }
     }
 
