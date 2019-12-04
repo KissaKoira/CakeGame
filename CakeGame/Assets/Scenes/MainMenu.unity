@@ -1043,16 +1043,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5450009494968940613, guid: f0608ed3d42379345b8ef0ede51bb9e7,
-        type: 3}
-      propertyPath: m_Name
-      value: Button
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450009494968940613, guid: f0608ed3d42379345b8ef0ede51bb9e7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5450009494968940612, guid: f0608ed3d42379345b8ef0ede51bb9e7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1158,6 +1148,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5450009494968940613, guid: f0608ed3d42379345b8ef0ede51bb9e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450009494968940613, guid: f0608ed3d42379345b8ef0ede51bb9e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450009494968940615, guid: f0608ed3d42379345b8ef0ede51bb9e7,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450009495833109116, guid: f0608ed3d42379345b8ef0ede51bb9e7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5450009496355749136, guid: f0608ed3d42379345b8ef0ede51bb9e7,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1181,16 +1191,6 @@ PrefabInstance:
     - target: {fileID: 5450009496355749136, guid: f0608ed3d42379345b8ef0ede51bb9e7,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450009495833109116, guid: f0608ed3d42379345b8ef0ede51bb9e7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5450009494968940615, guid: f0608ed3d42379345b8ef0ede51bb9e7,
-        type: 3}
-      propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1397,18 +1397,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613288330}
   m_CullTransparentMesh: 0
---- !u!114 &796156559 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 764960493554200788, guid: 6a6d78583325c694dba4124bf9e12535,
-    type: 3}
-  m_PrefabInstance: {fileID: 764960494182535771}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d9913ac6957b042ac7153cc06a5b3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &798312863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,7 +1681,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 796156559}
+      - m_Target: {fileID: 764960493554200788, guid: 6a6d78583325c694dba4124bf9e12535,
+          type: 3}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -7970,11 +7959,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 764960493554200789, guid: 6a6d78583325c694dba4124bf9e12535,
-        type: 3}
-      propertyPath: m_Name
-      value: SceneController
-      objectReference: {fileID: 0}
     - target: {fileID: 764960493554200779, guid: 6a6d78583325c694dba4124bf9e12535,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8029,6 +8013,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 764960493554200789, guid: 6a6d78583325c694dba4124bf9e12535,
+        type: 3}
+      propertyPath: m_Name
+      value: SceneController
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a6d78583325c694dba4124bf9e12535, type: 3}

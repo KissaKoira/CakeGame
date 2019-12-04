@@ -113,9 +113,9 @@ TextureImporter:
       name: cakeCable
       rect:
         serializedVersion: 2
-        x: 36
+        x: 32
         y: 768
-        width: 56
+        width: 64
         height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -155,10 +155,10 @@ TextureImporter:
       name: cakeClawL
       rect:
         serializedVersion: 2
-        x: 122
-        y: 417
-        width: 201
-        height: 319
+        x: 121
+        y: 401
+        width: 210
+        height: 350
       alignment: 9
       pivot: {x: 0.9, y: 0.9}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: cakeClawR
       rect:
         serializedVersion: 2
-        x: 125
-        y: 33
-        width: 201
-        height: 319
+        x: 120
+        y: 17
+        width: 210
+        height: 350
       alignment: 9
       pivot: {x: 0.1, y: 0.9}
       border: {x: 0, y: 0, z: 0, w: 0}

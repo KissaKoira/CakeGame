@@ -464,7 +464,7 @@ Animator:
   m_GameObject: {fileID: 1261845820345129832}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d4ccdd7300b25a3429af8607f7f7f816, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7636,6 +7636,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1261845822138986233}
     m_Modifications:
+    - target: {fileID: 1004144020396886901, guid: 8af2d3c67fdd30442a04dccff2202cc6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453176704155227807, guid: 8af2d3c67fdd30442a04dccff2202cc6,
+        type: 3}
+      propertyPath: m_Name
+      value: galaxy
+      objectReference: {fileID: 0}
     - target: {fileID: 7656366002829663349, guid: 8af2d3c67fdd30442a04dccff2202cc6,
         type: 3}
       propertyPath: m_RootOrder
@@ -7704,16 +7714,6 @@ PrefabInstance:
     - target: {fileID: 7656366002829663349, guid: 8af2d3c67fdd30442a04dccff2202cc6,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1453176704155227807, guid: 8af2d3c67fdd30442a04dccff2202cc6,
-        type: 3}
-      propertyPath: m_Name
-      value: galaxy
-      objectReference: {fileID: 0}
-    - target: {fileID: 1004144020396886901, guid: 8af2d3c67fdd30442a04dccff2202cc6,
-        type: 3}
-      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

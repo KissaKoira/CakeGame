@@ -8,6 +8,8 @@ public class FeverEffects : MonoBehaviour
     private Animator anim;
     private AudioManager audio;
     private string prevMusic;
+    private bool startTriggered = false;
+    private bool endTriggered = false;
     public void Start()
     {
         anim = GetComponent<Animator>();
@@ -16,18 +18,29 @@ public class FeverEffects : MonoBehaviour
     }
     public void StartFever()
     {
-        anim.SetBool("Fever", true);
-        audio.Play("FeverStart");
-        prevMusic = audio.currentMusic.name;
-        audio.PlayMusic("FeverMarch");
-        FeverState = true;
+        if (startTriggered == false)
+        {
+            audio.Play("FeverStart");
+            anim.SetBool("Fever", true);
+            prevMusic = audio.currentMusic.name;
+            audio.PlayMusic("FeverMarch");
+            FeverState = true;
+        }
+        startTriggered = true;
+        endTriggered = false;
     }
 
     public void StopFever()
     {
-        anim.SetBool("Fever", false);
-        audio.PlayMusic(prevMusic);
-        FeverState = false;
+        if (endTriggered == false)
+        {
+            anim.SetBool("Fever", false);
+            audio.PlayMusic(prevMusic);
+            FeverState = false;
+            startTriggered = false;
+        }
+        endTriggered = true;
+        startTriggered = false;
     }
 
     public void Update()

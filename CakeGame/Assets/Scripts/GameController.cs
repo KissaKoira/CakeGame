@@ -256,11 +256,13 @@ public class GameController : MonoBehaviour
         {
             frenzyCounter -= Time.deltaTime;
 
-            feverEffect.GetComponent<Animator>().SetBool("Fever", true);
+            //feverEffect.GetComponent<Animator>().SetBool("Fever", true);
+            feverEffect.GetComponent<FeverEffects>().StartFever();
         }
         if(frenzyCounter <= 0 && frenzyOn)
         {
-            feverEffect.GetComponent<Animator>().SetBool("Fever", false);
+            //feverEffect.GetComponent<Animator>().SetBool("Fever", false);
+            feverEffect.GetComponent<FeverEffects>().StopFever();
 
             if (frenzy > 0)
             {
