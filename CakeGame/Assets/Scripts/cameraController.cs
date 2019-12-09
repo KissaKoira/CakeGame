@@ -12,19 +12,30 @@ public class cameraController : MonoBehaviour
     void Start()
     {
         anchor = GameObject.Find("Ground");
-        anchorRigid = anchor.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        anchorRigid.MovePosition(new Vector2(anchor.transform.position.x, anchor.transform.position.y + (p2 - anchor.transform.position.y) * Time.deltaTime * 5));
+        anchor.GetComponent<Rigidbody2D>().MovePosition(new Vector2(anchor.transform.position.x, anchor.transform.position.y + (p2 - anchor.transform.position.y) * Time.deltaTime * 5));
     }
 
     public void moveCamera(GameObject newAnchor)
     {
         anchor = newAnchor;
-        anchorRigid = anchor.GetComponent<Rigidbody2D>();
         p2 = anchor.transform.position.y - 1;
+    }
+
+    public void releaseAnchor()
+    {
+        if(anchor.name == "Ground")
+        {
+            anchor.transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        anchor.GetComponent<SpriteRenderer>().sprite = null;
+
+        anchor.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        anchor.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
     }
 }

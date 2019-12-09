@@ -46,9 +46,6 @@ public class collision : MonoBehaviour
 
         for (int i = cakes.Length - 1; i >= 0; i--)
         {
-
-            Debug.Log(cakes.Length + " " + i + " " + cakes[i]);
-
             if(i == 0)
             {
                 cakes[i] = newCake;
@@ -93,11 +90,11 @@ public class collision : MonoBehaviour
         if (lastCake != null)
         {
             cakeOffset = cakeBody.transform.position.x - lastCake.transform.position.x;
-            Debug.Log(cakeOffset);
         }
 
         if (lastCake == null || Mathf.Abs(cakeOffset) < 1f)
         {
+            //keeps 10 cakes in the stack
             limitCakes(cakeBody);
 
             //plays the bounce animation
@@ -126,6 +123,13 @@ public class collision : MonoBehaviour
 
             //combo
             float cFactor = 1;
+
+            float fFactor = 1;
+
+            if (gameController.frenzyOn)
+            {
+                fFactor = 2;
+            }
 
             if (lastCake != null)
             {
@@ -157,7 +161,7 @@ public class collision : MonoBehaviour
             }
 
             //points
-            float newPoints = cakeBody.GetComponent<cakeController>().points * pFactor * cFactor;
+            float newPoints = cakeBody.GetComponent<cakeController>().points * pFactor * cFactor * fFactor;
             GameObject newPointElem = Instantiate(points, canvas.transform);
             newPointElem.GetComponentInChildren<TextMeshProUGUI>().text = newPoints.ToString();
             gameController.points += newPoints;
@@ -192,7 +196,11 @@ public class collision : MonoBehaviour
                 }
             }
 
-            gameController.setLastCake(cakeBody);            
+            //sets the last cake
+            gameController.setLastCake(cakeBody);
+
+            //checks if stack is stable
+            gameController.cakeStability();
         }
         else
         {
@@ -201,7 +209,5 @@ public class collision : MonoBehaviour
 
             gameController.setHealth(gameController.getHealth() - 1);
         }
-
-        Debug.Log("Health: " + gameController.getHealth());
     }
 }

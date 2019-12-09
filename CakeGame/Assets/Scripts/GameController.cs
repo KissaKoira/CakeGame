@@ -5,6 +5,8 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
+    public cameraController cameraController;
+
     public Sprite[] cakeSprites;
     public Sprite[] outlineSprites;
     public int[] cakePoints;
@@ -275,8 +277,6 @@ public class GameController : MonoBehaviour
             }
         }
 
-        Debug.Log("frenzy: " + frenzy + " frenzyOn: " + frenzyOn + " frenzyCounter: " + frenzyCounter);
-
         //swipe controls
         Swipe();
 
@@ -365,6 +365,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //latest cake
     GameObject lastCake;
 
     public void setLastCake(GameObject cake)
@@ -377,6 +378,7 @@ public class GameController : MonoBehaviour
         return lastCake;
     }
 
+    //cakes in the stack
     private GameObject[] cakes = new GameObject[10];
 
     public void setCakes(GameObject[] newCakes)
@@ -389,6 +391,37 @@ public class GameController : MonoBehaviour
         return cakes;
     }
 
+    //tower stability
+    public void cakeStability()
+    {
+        float stability = 0;
+        float offsets = 0;
+        int amount = 0;
+
+        for (int i = 0; i < cakes.Length; i++)
+        {
+            if(cakes[i] != null)
+            {
+                amount += 1;
+                offsets += Mathf.Abs(cakes[i].transform.position.x);
+                stability = offsets / amount;
+            }
+        }
+
+        Debug.Log(stability);
+
+        if (stability > 1)
+        {
+            //tower falls over
+            cameraController.releaseAnchor();
+        }
+        else if (stability > 0.7)
+        {
+            //warn of instability
+        }
+    }
+
+    //combo counter
     private int comboCounter;
 
     public void setComboCounter(int num)
@@ -401,6 +434,7 @@ public class GameController : MonoBehaviour
         return comboCounter;
     }
 
+    //health
     private int health = 3;
 
     public void setHealth(int num)
