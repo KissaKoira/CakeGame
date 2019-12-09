@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -435,7 +436,24 @@ public class GameController : MonoBehaviour
     }
 
     //health
+
+    public Image[] hearts;
     private int health = 3;
+
+    public void updateHealth()
+    {
+        for(int i = 0; i < hearts.Length; i++)
+        {
+            if(i < health)
+            {
+                hearts[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                hearts[i].gameObject.SetActive(false);
+            }
+        }
+    }
 
     public void setHealth(int num)
     {

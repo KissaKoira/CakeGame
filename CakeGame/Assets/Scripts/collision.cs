@@ -208,6 +208,12 @@ public class collision : MonoBehaviour
             cakeBody.transform.GetChild(1).GetComponent<Animator>().SetTrigger("fade");
 
             gameController.setHealth(gameController.getHealth() - 1);
+            gameController.updateHealth();
+
+            if(gameController.getHealth() == 0)
+            {
+                //gameover
+            }
         }
     }
 }
