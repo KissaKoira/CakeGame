@@ -15,6 +15,7 @@ public class collision : MonoBehaviour
     public GameObject combo2;
     public GameObject combo3;
     public GameObject perfect;
+    public GameObject perfectFlash;
 
     private GameObject cakeBody;
     public GameObject lastCake;
@@ -118,6 +119,7 @@ public class collision : MonoBehaviour
             {
                 cakeBody.transform.position -= new Vector3(cakeOffset, 0, 0);
                 Instantiate(perfect, canvas.transform);
+                Instantiate(perfectFlash, cakeBody.transform);
                 pFactor = 2;
             }
 

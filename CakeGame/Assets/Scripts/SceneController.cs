@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public string currentSceneName;
-
     public static SceneController instance;
+    public GameObject loadingPrefab;
+    public AsyncOperation async;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,32 +25,22 @@ public class SceneController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void GoToScene(string newScene)
+    public void LoadSceneAsync(int loadSceneIndex)
     {
-        Debug.Log(newScene);
-        if (SceneManager.GetActiveScene().name != newScene)
+        Instantiate(loadingPrefab);
+        instance.StartCoroutine(instance.AsyncLoad(loadSceneIndex));
+    }
+
+    IEnumerator AsyncLoad(int index)
+    {
+        async = SceneManager.LoadSceneAsync(index);
+        Debug.Log("Start async scene loading");
+        while (!async.isDone)
         {
-            Debug.Log("Start loading scene: " + newScene);
-            SceneManager.LoadScene(newScene, LoadSceneMode.Single);
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            currentSceneName = newScene;
+            yield return null;
         }
-    }
-
-    public void ToGame()
-    {
-        //FindObjectOfType<LoadingScreen>().gameObject.SetActive(true);
-        FindObjectOfType<AudioManager>().PlayMusic("March1");
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
-        currentSceneName = "Main";
-    }
-
-    public void ToMenu()
-    {
-        //FindObjectOfType<LoadingScreen>().gameObject.SetActive(true);
-        FindObjectOfType<AudioManager>().PlayMusic("Intro1");
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-        currentSceneName = "MainMenu";
+        string[] sceneMusics = new string[] { "Intro1", "March1" };
+        FindObjectOfType<AudioManager>().PlayMusic(sceneMusics[index - 1]);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

@@ -9,11 +9,11 @@ MonoImporter:
   - canvas: {instanceID: 0}
   - points: {fileID: 8477974195462931559, guid: 182ffb7384d12ef48bb84b6d281aa85a,
       type: 3}
-  - combo1: {fileID: 8477974195462931559, guid: 6e9a594e267fb0c4f99ee5362765f5d7,
-      type: 3}
-  - combo2: {fileID: 8477974195462931559, guid: df5fc0ef5a6424c41ab3cee2be08456a,
-      type: 3}
-  - combo3: {fileID: 8477974195462931559, guid: 39bddf7063938234faf991df28c24933,
+  - combo1: {instanceID: 0}
+  - combo2: {instanceID: 0}
+  - combo3: {instanceID: 0}
+  - perfect: {instanceID: 0}
+  - perfectFlash: {fileID: 6527910725636246593, guid: 7e97d010c4c7135499d42d5278aab07f,
       type: 3}
   - lastCake: {instanceID: 0}
   executionOrder: 0

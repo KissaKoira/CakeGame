@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSceneName: 
+  loadingPrefab: {fileID: 4766354240193330945, guid: fb1683d12f423c5449ebaef90fa1ac0c,
+    type: 3}

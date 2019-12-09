@@ -78,6 +78,8 @@ MonoBehaviour:
   combo2: {fileID: 1905126302010747496, guid: f98e72af1f5bef04396ae8abcfefeb06, type: 3}
   combo3: {fileID: 1905126302010747496, guid: dc793f32e55e1084fae9561bec1c7a52, type: 3}
   perfect: {fileID: 1905126302010747496, guid: 63ec53994ede4314293c8c1690ea5062, type: 3}
+  perfectFlash: {fileID: 6527910725636246593, guid: 7e97d010c4c7135499d42d5278aab07f,
+    type: 3}
   lastCake: {fileID: 0}
 --- !u!1 &685418325386008242
 GameObject:
@@ -468,6 +470,7 @@ MonoBehaviour:
   points: 0
   cake: {fileID: 0}
   outline: {fileID: 0}
+  colors: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &4299872649789003718
 GameObject:
   m_ObjectHideFlags: 0
