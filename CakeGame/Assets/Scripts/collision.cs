@@ -35,7 +35,7 @@ public class collision : MonoBehaviour
 
         lastCake = gameController.getLastCake();
 
-        canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("PointCanvas");
 
         anchor = GameObject.Find("Ground");
     }
