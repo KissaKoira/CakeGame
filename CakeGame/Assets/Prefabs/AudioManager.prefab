@@ -68,6 +68,14 @@ MonoBehaviour:
     pitchRandom: 0
     loop: 0
     source: {fileID: 0}
+  - name: Fail
+    clip: {fileID: 8300000, guid: 914a3f3dc93a78143b395a9b5fbe302a, type: 3}
+    volume: 0.3
+    volumeRandom: 0
+    pitch: 1
+    pitchRandom: 0
+    loop: 0
+    source: {fileID: 0}
   music:
   - name: Intro1
     clip: {fileID: 8300000, guid: a762dea590947ff428af4bcc9d772308, type: 3}

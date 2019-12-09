@@ -438,6 +438,7 @@ public class GameController : MonoBehaviour
 
     public void updateHealth()
     {
+        FindObjectOfType<AudioManager>().Play("Fail");
         for(int i = 0; i < hearts.Length; i++)
         {
             if(i < health)
