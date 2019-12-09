@@ -212,7 +212,7 @@ public class collision : MonoBehaviour
 
             if(gameController.getHealth() == 0)
             {
-                //gameover
+                gameController.gameOver();
             }
         }
     }

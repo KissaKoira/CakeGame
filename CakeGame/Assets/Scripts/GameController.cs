@@ -343,11 +343,6 @@ public class GameController : MonoBehaviour
 
             createCake();
         }
-
-        if (Input.GetButtonDown("test"))
-        {
-            frenzy = 100;
-        }
     }
 
     public void disableAnimator()
@@ -415,6 +410,7 @@ public class GameController : MonoBehaviour
         {
             //tower falls over
             cameraController.releaseAnchor();
+            gameOver();
         }
         else if (stability > 0.7)
         {
@@ -463,5 +459,15 @@ public class GameController : MonoBehaviour
     public int getHealth()
     {
         return health;
+    }
+
+    public Image gameOverScreen;
+
+    public void gameOver()
+    {
+        gameOverScreen.gameObject.SetActive(true);
+        gameOverScreen.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText(points.ToString());
+
+        enabled = false;
     }
 }
