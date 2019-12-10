@@ -5,6 +5,7 @@ using UnityEngine;
 public class FeverEffects : MonoBehaviour
 {
     public bool FeverState;
+    public GameObject UIObject;
     private Animator anim;
     //private AudioManager audio;
     private string prevMusic;
@@ -24,6 +25,7 @@ public class FeverEffects : MonoBehaviour
             anim.SetBool("Fever", true);
             prevMusic = FindObjectOfType<AudioManager>().currentMusic.name;
             FindObjectOfType<AudioManager>().PlayMusic("FeverMarch");
+            UIObject.GetComponent<Animator>().SetBool("fever", true);
             FeverState = true;
         }
         startTriggered = true;
@@ -36,6 +38,7 @@ public class FeverEffects : MonoBehaviour
         {
             anim.SetBool("Fever", false);
             FindObjectOfType<AudioManager>().PlayMusic(prevMusic);
+            UIObject.GetComponent<Animator>().SetBool("fever", false);
             FeverState = false;
             startTriggered = false;
         }
