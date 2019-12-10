@@ -108,8 +108,6 @@ public class collision : MonoBehaviour
 
             if (lastCake != null) { 
                 thisSplat.GetComponent<ParticleSystem>().startColor = lastCake.GetComponent<cakeController>().colors;
-            } else {
-                thisSplat.GetComponent<ParticleSystem>().startColor = cakeBody.GetComponent<cakeController>().colors;
             }
 
             //perfect
