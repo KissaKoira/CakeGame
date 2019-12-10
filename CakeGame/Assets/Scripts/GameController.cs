@@ -237,7 +237,7 @@ public class GameController : MonoBehaviour
         {
             if (frenzy > 0 && frenzy < 100)
             {
-                frenzy -= Time.deltaTime * 10;
+                frenzy -= Time.deltaTime * 2;
             }
             else if (frenzy >= 100)
             {

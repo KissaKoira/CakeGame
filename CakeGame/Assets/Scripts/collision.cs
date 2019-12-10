@@ -168,7 +168,7 @@ public class collision : MonoBehaviour
 
             if(gameController.frenzyOn == false)
             {
-                gameController.frenzy += (newPoints * 0.1f);
+                gameController.frenzy += (newPoints * 0.05f);
             }
 
             cakeBody.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
