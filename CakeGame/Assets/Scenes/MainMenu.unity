@@ -215,6 +215,127 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &25315382
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3438610279305729961, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_Name
+      value: Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279305729966, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279435468117, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279435468117, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279435468117, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279435468117, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438610279435468117, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3149341045998663859, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3149341045998663859, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Highscores are not available yet...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3149341045998663859, guid: 78495fc5635986b4392f7c91e4aaae63,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: Please check back later for updates!
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 78495fc5635986b4392f7c91e4aaae63, type: 3}
+--- !u!114 &25315383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3149341045998663859, guid: 78495fc5635986b4392f7c91e4aaae63,
+    type: 3}
+  m_PrefabInstance: {fileID: 25315382}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c363e2c19f1920e459e28b06a0415bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &71310371
 GameObject:
   m_ObjectHideFlags: 0
@@ -7243,7 +7364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1339598858
 Animator:
   serializedVersion: 3
@@ -7325,7 +7446,7 @@ Transform:
   m_LocalScale: {x: 12, y: 12, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1370417780
 GameObject:
@@ -7412,6 +7533,17 @@ MonoBehaviour:
       - m_Target: {fileID: 1531005263}
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 25315383}
+        m_MethodName: TriggerDialogue
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
