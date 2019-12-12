@@ -63,7 +63,10 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        PlayMusic(initialMusic);
+        if (initialMusic != "")
+        {
+            PlayMusic(initialMusic);
+        }
     }
 
     public void Play (string name)
@@ -137,7 +140,7 @@ public class AudioManager : MonoBehaviour
 
     public void Update()
     {
-        if (currentMusic.useLoopPoint && currentMusic.source.time >= currentMusic.source.clip.length)
+        if (currentMusic != null && currentMusic.useLoopPoint && currentMusic.source.time >= currentMusic.source.clip.length)
         {
             currentMusic.source.Play();
             currentMusic.source.time = currentMusic.loopPoint;

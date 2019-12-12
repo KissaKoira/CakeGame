@@ -8,51 +8,54 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText;
     public Animator animator;
-    
-    private Queue<string> sentences;
+
+    private Queue<Dialogue.Line> lines;
 
     void Start()
     {
-        sentences = new Queue<string>();
+        lines = new Queue<Dialogue.Line>();
     }
 
-    public void StartDialogue (Dialogue dialogue)
+    public void StartDialogue(Dialogue dialogue)
     {
         animator.SetBool("IsOpen", true);
-        sentences.Clear();
+        lines.Clear();
 
-        foreach (string sentence in dialogue.sentences)
+        foreach (Dialogue.Line line in dialogue.lines)
         {
-            sentences.Enqueue(sentence);
+            lines.Enqueue(line);
         }
 
         DisplayNextSentence();
     }
 
-    public void DisplayNextSentence ()
+    public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
+        if (lines.Count == 0)
         {
             EndDialogue();
             return;
         }
 
-        string sentence = sentences.Dequeue();
+        Dialogue.Line line = lines.Dequeue();
+
+        line.ExecuteActions();
+
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        StartCoroutine(TypeSentence(line));
     }
 
-    IEnumerator TypeSentence (string sentence)
+    IEnumerator TypeSentence(Dialogue.Line line)
     {
         dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        foreach (char letter in line.sentence.ToCharArray())
         {
             dialogueText.text += letter;
             yield return null;
         }
     }
 
-    void EndDialogue ()
+    void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
     }
