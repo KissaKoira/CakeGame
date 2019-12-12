@@ -39,8 +39,6 @@ public class SceneController : MonoBehaviour
         {
             yield return null;
         }
-        string[] sceneMusics = new string[] { "Intro1", "March1" };
-        FindObjectOfType<AudioManager>().PlayMusic(sceneMusics[index - 1]);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

@@ -9,12 +9,14 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public Animator animator;
 
-    private Queue<Dialogue.Line> lines;
+    private Queue<Dialogue.Line> lines = new Queue<Dialogue.Line>();
 
+    /*
     void Start()
     {
         lines = new Queue<Dialogue.Line>();
     }
+    */
 
     public void StartDialogue(Dialogue dialogue)
     {

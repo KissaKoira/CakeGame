@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -66,6 +67,23 @@ public class AudioManager : MonoBehaviour
         if (initialMusic != "")
         {
             PlayMusic(initialMusic);
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex == 2)
+        {
+            PlayMusic("March1");
+        }
+        else
+        {
+            PlayMusic("Intro1");
         }
     }
 
