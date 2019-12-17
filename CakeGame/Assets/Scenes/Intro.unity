@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introTime: 5
-  sceneAfter: MainMenu
+  sceneAfter: LogoScreen
 --- !u!4 &1929358393
 Transform:
   m_ObjectHideFlags: 0

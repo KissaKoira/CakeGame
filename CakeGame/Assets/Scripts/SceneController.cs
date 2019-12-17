@@ -23,6 +23,9 @@ public class SceneController : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
     public void LoadSceneAsync(int loadSceneIndex)
